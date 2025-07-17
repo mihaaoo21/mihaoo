@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luar Angkasa - Bintang Cepat Berkedip</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0%   { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 1;   transform: scale(1.2); }
+    }
+
+    .shooting-star {
+      position: absolute;
+      top: -50px;
+      width: 2px;
+      height: 100px;
+      background: linear-gradient(45deg, white, transparent);
+      opacity: 0;
+      animation: shoot 3s ease-in-out infinite;
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-1000px) translateY(1000px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .shooting-star:nth-child(2) { left: 80%; animation-delay: 1s; }
+    .shooting-star:nth-child(3) { left: 50%; animation-delay: 4s; }
+    .shooting-star:nth-child(4) { left: 30%; animation-delay: 7s; }
+    .shooting-star:nth-child(5) { left: 60%; animation-delay: 10s; }
+    .shooting-star:nth-child(6) { left: 40%; animation-delay: 13s; }
+  </style>
+</head>
+<body>
+  <div id="stars-container"></div>
+
+  <!-- Komet Jatuh -->
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+
+  <script>
+    const container = document.getElementById("stars-container");
+
+    const totalStars = 100;
+    for (let i = 0; i < totalStars; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = `${Math.random() * window.innerHeight}px`;
+      star.style.left = `${Math.random() * window.innerWidth}px`;
+      star.style.animationDuration = `${Math.random() * 0.8 + 0.8}s`; // 0.8s–1.6s
+      star.style.animationDelay = `${Math.random() * 1}s`;
+      star.style.opacity = Math.random();
+      container.appendChild(star);
+    }
+  </script>
+</body>
+</html>
